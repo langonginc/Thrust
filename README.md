@@ -12,7 +12,7 @@ We use Arduino Mega 2560 and HX711 to record and store the magnitude of the thru
 
 - **0-20kg** measuring range _(maximum value not to exceed 30kg)_
 - 30-50mm engine diameter fit
-- 10Hz sample rate
+- 10Hz sample rate (https://github.com/langonginc/ForceTestStand/issues/1 We really need your help to increase it)
 - Real-time display
 - SD card data writing
 
