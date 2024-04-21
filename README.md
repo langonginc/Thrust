@@ -12,7 +12,7 @@ We use Arduino Mega 2560 and HX711 to record and store the magnitude of the thru
 
 - **0-20kg** measuring range _(maximum value not to exceed 30kg)_
 - 30-50mm engine diameter fit
-- 10Hz sample rate (langonginc/ForceTestStand#1 We really need your help to increase it)
+- 10Hz sample rate ([#1](https://github.com/langonginc/ForceTestStand/issues/1) We really need your help to increase it)
 - Real-time display
 - SD card data writing
 
@@ -28,11 +28,13 @@ After that, Arduino will get the digital signals (ad values). We then scale the 
 
 ## Why We Use HX711
 
-Based on Avia Semiconductor’s patented technology, HX711 is a precision 24-bit analog- to-digital converter (ADC) designed for weigh scales and industrial control applications to interface directly with a bridge sensor.
+Based on Avia Semiconductor’s patented technology, HX711 is a precision 24-bit analog-to-digital converter (ADC) designed for weigh scales and industrial control applications to interface directly with a bridge sensor.
 
-The input multiplexer selects either Channel A or B differential input to the low-noise programmable gain amplifier (PGA). Channel A can be programmed with a gain of 128 or 64, corresponding to a full-scale differential input voltage of ±20mV or ±40mV respectively, when a 5V supply is connected to AVDD analog power supply pin. Channel B has a fixed gain of 32. On- chip power supply regulator eliminates the need for an external supply regulator to provide analog power for the ADC and the sensor. Clock input is flexible. It can be from an external clock source, a crystal, or the on-chip oscillator that does not require any external component. On-chip power- on-reset circuitry simplifies digital interface initialization.
+The input multiplexer selects either Channel A or B differential input to the low-noise programmable gain amplifier (PGA). Channel A can be programmed with a gain of 128 or 64, corresponding to a full-scale differential input voltage of ±20mV or ±40mV respectively, when a 5V supply is connected to AVDD analog power supply pin. Channel B has a fixed gain of 32. On-chip power supply regulator eliminates the need for an external supply regulator to provide analog power for the ADC and the sensor. Clock input is flexible. It can be from an external clock source, a crystal, or the on-chip oscillator that does not require any external component. On-chip power-on-reset circuitry simplifies digital interface initialization.
 
 There is no programming needed for the internal registers. All controls to the HX711 are through the pins.
+
+> We are using the channel A (input voltage of ±20mV).
 
 ## How HX711 works
 
