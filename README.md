@@ -69,6 +69,7 @@ Wire the Arduino board and components using DuPont wires according to the follow
 | Item | Image | Reference link |
 | :----- | :----- | :----- |
 | HX711 chip + Pressure sensor | <img width="423" alt="image" src="https://github.com/langonginc/Thrust/assets/59787082/d9462333-b126-4f56-bf2f-f4b3c8cb072a"> | [Link](https://detail.tmall.com/item.htm?id=570644601916) |
+| TM1650 4-digit digital tube display module | <img width="421" alt="image" src="https://github.com/langonginc/Thrust/assets/59787082/7d78ea1e-d939-419a-a8d0-1551830b52e4"> | |
 
 **Arduino - HX711**
 
