@@ -1,27 +1,28 @@
 /*
- Last modified: 2025 04 18
+ Horizontal Thrust Measuring Stage (https://github.com/langonginc/Thrust)
+ by Jiayi Wu (@langonginc)
+  - The Aviation Club of the Second High School Attached to Beijing Normal University
 
+ Last modified: 2024/04/28
+
+* HX711
  Arduino pin 2 -> HX711 SCK (CLK)
  3 -> DT (D_OUT)
  5V -> VCC
  GND -> GND
 
+* SD
  5V -> 5V
  GND -> GND
  CS -> 4
  MOSI -> 11
  SCK -> 13
  MISO -> 12
-
- 5? -> LED+
- 9? -> Switch
- LED needs R = 200 Omega
- Switch needs R = 10K Omega
 */
 
 #include <HX711.h>
-#include <SPI.h>
-#include <SD.h>
+// #include <SPI.h>
+// #include <SD.h>
 #include <Wire.h>
 #include <TM1650.h>
 
@@ -33,11 +34,10 @@
 #define DOUT  3
 #define CLK  2
 #define CHIP_SELECT  53
-#define LED  LED_BUILTIN  //5
-#define SWITCH 9
+#define LED  LED_BUILTIN
 
 HX711 scale;
-File dataFile;
+// File dataFile;
 TM1650 display;
 
 enum Status {
@@ -51,7 +51,7 @@ bool LedStatus;
 
 /*
 * Error List
-* 1: SD card init failed
+* 1: SD card init failed - *Removed
 * 2: File cannot be read (e.g. the file is read-only)
 */
 void error (int id) {
@@ -71,7 +71,7 @@ void setup() {
   Serial.begin(9600);
   Serial.println("Starting...");
   pinMode(LED, OUTPUT);
-  pinMode(SWITCH, INPUT);
+  LedStatus = false;
 
   /* Display Setup */
   Wire.begin(); //Join the bus as master
@@ -86,6 +86,7 @@ void setup() {
  // scale.set_offset(zero_factor); //Zero out the scale using a previously known zero_factor
 
   /* SD Setup */
+  /* SD card was dropped in version 1.3
   if (!SD.begin(CHIP_SELECT)) {
     Serial.println(F("SD card initialization failure. Exit..."));
     error(1);
@@ -101,11 +102,11 @@ void setup() {
     exit(1);
     return;
   }
+  */
 
   Serial.println("Started~");
 
   status = Ready;
-  LedStatus = false;
   display.displayString("8888");
 }
 
@@ -152,16 +153,18 @@ inline void displayValue (int value) {
   }
 }
 
-inline void writeData (unsigned long t, float f) {
+inline void writeData (unsigned long t, double f) {
+  /* SD card part was dropped in version 1.3
   dataFile.print(t);
   dataFile.print(", ");
   dataFile.print(f);
   dataFile.print(", ");
+  */
 
-  // Serial.print("time: ");
-  // Serial.print(t);
-  // Serial.print(" value: ");
-  // Serial.println(f);
+  Serial.print(t);
+  Serial.print(", ");
+  Serial.print(f);
+  Serial.print(", ");
 }
 
 unsigned long startTime = 0;
@@ -209,12 +212,6 @@ void loop() {
       }
       break;
     case Working:
-      // if (digitalRead(SWITCH) == HIGH) {
-      //   LoLed();
-      //   dataFile.close();
-      //   status = Done;
-      //   break;
-      // }
       if (valInt > 0) {
         if (startTime == 0) {
           HiLed();
@@ -229,10 +226,11 @@ void loop() {
       }
       if (valInt < -1000) {
         LoLed();
-        dataFile.println("");
-        dataFile.close();
-        display.displayString("    ");
-        Serial.println("Stop");
+        // dataFile.println("");
+        // dataFile.close();
+        display.displayString("8888");
+        Serial.println("<-");
+        Serial.println("Exit with code 0.");
         exit(0);
       }
       break;
