@@ -6,6 +6,8 @@ This is a project created by students in The Aviation Club of the [Second High S
 
 ![SolidWorks 3D Model](https://github.com/langonginc/Thrust/assets/59787082/9b430c01-5098-4a07-90ee-a4aa83d04bf6)
 
+[Video from bilibili](https://www.bilibili.com/video/BV1fC411E7s8/?share_source=copy_web&vd_source=09f47ca71ce9a13b053114acdf5cffeb) 
+
 # Highlights
 
 We use Arduino Mega 2560 and HX711 to record and store the magnitude of the thrust into the program, and graph the associated function (force @ time).
